@@ -13,10 +13,11 @@ Usage of split follows the form
 $ split.sh -ext "top-level directory"
 where ext is one of ape, wav or flac and corresponds to the extension of the
 image you wish to split. The top-level directory can be either a folder
-containing numerous folders of images you wish to split or a single folder. If
-it is the former, and contains mixed folders with ape and flac images, you
-should run split with the -flac option first or you'll wind up with a lot of
-empty 'converted' folders and a lot of complaints on the command-line (although
+containing numerous folders of images you wish to split or a single folder, and
+must be an absolute path (no . or ..; ~ is fine). If it is a folder containing
+folders, and contains mixed folders with ape and flac images, you should run
+split with the -flac option first or you'll wind up with a lot of empty
+'converted' folders and a lot of complaints on the command-line (although
 nothing bad will happen).
 
 The accuracy of the metadata in the cuesheet is critical to split.sh's operation.
