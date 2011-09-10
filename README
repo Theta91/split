@@ -6,8 +6,8 @@ the metadata in the cuesheet and renames them based on the tags (in the form
 To use split, you must have, at minimum, cuetools and flac installed. In
 addition, you must have the script cuetag installed as /usr/bin/cuetag.sh. Some
 distributions install it as /usr/bin/cuetag; if your distribution does this, you
-must run ln -s /usr/bin/cuetag.sh or change the script appropriately. If you
-want to split ape images, you must have mac installed.
+must run ln -s /usr/bin/cuetag /usr/bin/cuetag.sh or adjust the script
+appropriately. If you want to split ape images, you must have mac installed.
 
 Usage of split follows the form
 $ split -ext "top-level directory"
