@@ -1,16 +1,16 @@
-split is a command-line utility that splits ape, wav or flac files based on a
+split.sh is a command-line utility that splits ape, wav or flac files based on a
 cuesheet, transcodes them to flac (at compression level 8), adds tags based on
 the metadata in the cuesheet and renames them based on the tags (in the form
 %tracknumber% %tracktitle%).
 
-To use split, you must have, at minimum, cuetools and flac installed. In
-addition, you must have the script cuetag installed as /usr/bin/cuetag.sh. Some
-distributions install it as /usr/bin/cuetag; if your distribution does this, you
-must run ln -s /usr/bin/cuetag /usr/bin/cuetag.sh or adjust the script
+To use split.sh, you must have, at minimum, shntool, flac and cuetools installed.
+In addition, you must have the script cuetag installed as /usr/bin/cuetag.sh.
+Some distributions install it as /usr/bin/cuetag; if your distribution does this,
+you must run ln -s /usr/bin/cuetag /usr/bin/cuetag.sh or adjust the script
 appropriately. If you want to split ape images, you must have mac installed.
 
 Usage of split follows the form
-$ split -ext "top-level directory"
+$ split.sh -ext "top-level directory"
 where ext is one of ape, wav or flac and corresponds to the extension of the
 image you wish to split. The top-level directory can be either a folder
 containing numerous folders of images you wish to split or a single folder. If
@@ -18,3 +18,13 @@ it is the former, and contains mixed folders with ape and flac images, you
 should run split with the -flac option first or you'll wind up with a lot of
 empty 'converted' folders and a lot of complaints on the command-line (although
 nothing bad will happen).
+
+The accuracy of the metadata in the cuesheet is critical to split.sh's operation.
+For this reason, you should make sure all fields correspond to your (or others)
+standards before using split.sh. For classical music, you should make sure each
+track contains a line indicating the composer (COMPOSER "[composer]") and a line
+indicating the performer of the work (PERFORMER "[performer(s)]"). The default
+is to just have PERFORMER which will result in your files having both the Artist
+and Performer(/Original Artist, depending on where you're viewing the metadata)
+as PERFORMER; introducing the COMPOSER field results in COMPOSER being set as
+Artist and PERFORMER as Performer.
