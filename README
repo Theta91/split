@@ -9,6 +9,10 @@ Some distributions install it as /usr/bin/cuetag; if your distribution does this
 you must run ln -s /usr/bin/cuetag /usr/bin/cuetag.sh or adjust the script
 appropriately. If you want to split ape images, you must have mac installed.
 
+split.sh requires one cue file and one image file per folder. The cue file must
+be in the same folder as the image file you wish to split, but can be called
+anything.
+
 Usage of split follows the form
 $ split.sh -ext "top-level directory"
 where ext is one of ape, wav or flac and corresponds to the extension of the
@@ -20,12 +24,9 @@ split with the -flac option first or you'll wind up with a lot of empty
 'converted' folders and a lot of complaints on the command-line (although
 nothing bad will happen).
 
-The accuracy of the metadata in the cuesheet is critical to split.sh's operation.
-For this reason, you should make sure all fields correspond to your (or others)
-standards before using split.sh. For classical music, you should make sure each
-track contains a line indicating the composer (COMPOSER "[composer]") and a line
-indicating the performer of the work (PERFORMER "[performer(s)]"). The default
-is to just have PERFORMER which will result in your files having both the Artist
-and Performer(/Original Artist, depending on where you're viewing the metadata)
-as PERFORMER; introducing the COMPOSER field results in COMPOSER being set as
-Artist and PERFORMER as Performer.
+The accuracy of the title for each track in the cuesheet is critical to
+split.sh's operation. For this reason, you should make sure the titles are
+accurate and correspond to your (or other's) standards before using split.sh.
+This will prevent duplication of effort later. You can take care of
+composer/performer in the cuesheet if you want, but it is much easier to 
+batch fix this in any half decent tagging program.
