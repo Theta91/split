@@ -21,11 +21,11 @@
 case "$1" in
   "" | "-h" | "--help" )
     echo -e "Usage:"
-    echo -e "  split [option] [top-level directory]\n"
+    echo -e "  split.sh [option] [top-level directory]\n"
 
-    echo -e "split splits ape, wav or flac files based on a cuesheet, transcodes them to flac,"
+    echo -e "split.sh splits ape, wav or flac files based on a cuesheet, transcodes them to flac,"
     echo -e "tags them based on the cuesheet, and renames the files according to track number"
-    echo -e "and title."
+    echo -e "and title.\n"
 
     echo -e "Options:"
     echo -e "  -ape\t\tsplit ape files"
@@ -44,7 +44,7 @@ esac
 ################################################################################
 if [[ ! -d "${!#}" || -h "${!#}" ]]
 then
-  echo -e "Directory does not exist or is a symbolic link. For help, use 'split --help'"
+  echo -e "Directory does not exist or is a symbolic link. For help, use 'split.sh --help'"
   exit 1
 fi
 ################################################################################
