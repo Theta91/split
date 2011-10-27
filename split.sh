@@ -60,8 +60,8 @@ do
   for (( t=1; t<=$(find "${dir}/converted" -type f -print | wc -l); t++ ))
   do
     t0=$(printf %02d $t)
-    track_number[$t]="$(metaflac --list split-track${t0}.flac | awk -F "=" 'tolower($0) ~ /tracknumber/ { print $2 }' | sed s/[^0-9]//)"
-    track_title[$t]="$(metaflac --list split-track${t0}.flac | awk -F "=" 'tolower($0) ~ /title/ { print $2 }' | sed s/\//_/)"
+    track_number[$t]="$(metaflac --list split-track${t0}.flac | awk -F "=" 'tolower($0) ~ /tracknumber/ { print $2 }' | sed 's/[^0-9]//')"
+    track_title[$t]="$(metaflac --list split-track${t0}.flac | awk -F "=" 'tolower($0) ~ /title/ { print $2 }' | sed 's/\//_/' | sed 's/:/-/')"
     mv split-track${t0}.flac $(printf "%02d %s.flac" "${track_number[$t]}" "${track_title[$t]}")
   done
 done
