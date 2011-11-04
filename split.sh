@@ -49,26 +49,23 @@ then
 fi
 ################################################################################
 IFS=$'\n'
-files=( $(find "${!#}" -name *$ext -type f -print) )
+files=( $(find "${!#}" -name "*$ext" -type f -print) )
 
 for (( c=0; c<${#files[@]}; c++ ))
 do
   dir="$(dirname ${files[$c]})"
-  mkdir "${dir}/converted"; cd "${dir}/converted"
-  cuebreakpoints ../*.cue | shnsplit -P pct -O never -o 'flac flac -8 -o %f -' "${files[$c]}"
-  ntcue="$(awk '$0 ~ "TRACK" {var = $0} END { print var }' ../*.cue | awk -F " " '{ print $2 }')"
-  ntsplit="$(ls -1 | tail -n 1 | sed 's/[^0-9]//g')"
+  cd "${dir}"
+  cuebreakpoints *.cue | shnsplit -P pct -O never -o 'flac flac -8 -o %f -' "${files[$c]}"
+  ntcue="$(awk '$0 ~ "TRACK" {var = $0} END { print var }' *.cue | awk -F " " '{ print $2 }' | sed 's/^[0]//g')"
+  ntsplit="$(ls -1 split-track*.flac | wc -l)"
   if [[ $ntcue -eq $ntsplit ]]; then
-    cd "${dir}"
     rm "${files[$c]}"
-    mv ./converted/* .
     cuetag.sh *.cue split-track*.flac
-    for (( t=1; t<=$(find "${dir}" -name *.flac -type f -print | wc -l); t++ ))
+    for i in $(ls split-track*.flac)
     do
-      t0=$(printf %02d $t)
-      track_number[$t]="$(metaflac --list split-track${t0}.flac | awk -F "=" 'tolower($0) ~ /tracknumber/ { print $2 }' | sed 's/[^0-9]//')"
-      track_title[$t]="$(metaflac --list split-track${t0}.flac | awk -F "=" 'tolower($0) ~ /title/ { print $2 }' | sed 's/\//_/' | sed 's/:/-/')"
-      mv split-track${t0}.flac $(printf "%02d %s.flac" "${track_number[$t]}" "${track_title[$t]}")
+      t=$(echo ${i:11:2} | sed 's/^[0]//')
+      track_title="$(metaflac --list $i | awk -F '=' 'tolower($0) ~ /title/ { print $2 }' | sed 's/\//_/' | sed 's/:/-/')"
+      mv $i $(printf "%02d %s.flac" "${t}" "${track_title}")
     done
   fi
 done
