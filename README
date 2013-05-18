@@ -1,7 +1,10 @@
-split.sh is a command-line utility that splits ape, wav or flac files based on a
-cuesheet, transcodes them to flac (at compression level 8), adds tags based on
+split.sh is a command-line utility that splits ape, wav and flac files based on
+a cuesheet, transcodes them to flac (at compression level 8), adds tags based on
 the metadata in the cuesheet and renames them based on the tags (in the form
 %tracknumber% %tracktitle%).
+
+Usage
+-----
 
 To use split.sh, you must have, at minimum, shntool, flac and cuetools installed.
 In addition, you must have the script cuetag installed as /usr/bin/cuetag.sh.
@@ -13,20 +16,14 @@ split.sh requires one cue file and one image file per folder. The cue file must
 be in the same folder as the image file you wish to split, but can be called
 anything.
 
-Usage of split follows the form
-$ split.sh -ext "top-level directory"
-where ext is one of ape, wav or flac and corresponds to the extension of the
-image you wish to split. The top-level directory can be either a folder
-containing numerous folders of images you wish to split or a single folder, and
-must be an absolute path (no . or ..; ~ is fine). If it is a folder containing
-folders, and contains mixed folders with ape and flac images, you should run
-split with the -flac option first or you'll wind up with a lot of empty
-'converted' folders and a lot of complaints on the command-line (although
-nothing bad will happen).
+To use split, simply provide one or more top-level paths as arguments (must be
+absolute paths and not hard links). These top-level paths can be a single folder
+with one image file or a directory containing numerous folders of images you
+wish to split. Theoretically, you can include as many paths as you'd like.
 
-The accuracy of the title for each track in the cuesheet is critical to
-split.sh's operation. For this reason, you should make sure the titles are
-accurate and correspond to your (or other's) standards before using split.sh.
-This will prevent duplication of effort later. You can take care of
-composer/performer in the cuesheet if you want, but it is much easier to 
-batch fix this in any half decent tagging program.
+It would be wise not to include any paths that contain ape, flac or wav files
+that don't need to be split. Nothing bad should happen, but you'll get a lot of
+complaints.
+
+Don't worry too much about the accuracy of metadata in the cuesheet. Any half
+decent tagging program will be able to fix problems easily.
