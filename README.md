@@ -16,10 +16,10 @@ split.sh requires one cue file and one image file per folder. The cue file must
 be in the same folder as the image file you wish to split, but can be called
 anything.
 
-To use split, simply provide one or more top-level paths as arguments (must be
-absolute paths and not hard links). These top-level paths can be a single folder
-with one image file or a directory containing numerous folders of images you
-wish to split. Theoretically, you can include as many paths as you'd like.
+To use split, simply provide one or more top-level paths as arguments (no
+relative paths or hard links). These top-level paths can be a single folder with
+one image file or a directory containing numerous folders of images you wish to
+split. Theoretically, you can include as many paths as you'd like.
 
 It would be wise not to include any paths that contain ape, flac or wav files
 that don't need to be split. Nothing bad should happen, but you'll get a lot of
